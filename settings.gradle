@@ -1,0 +1,4 @@
+rootProject.name = 'sign-id-generator'
+include 'generator-service'
+include 'generator-intf'
+
