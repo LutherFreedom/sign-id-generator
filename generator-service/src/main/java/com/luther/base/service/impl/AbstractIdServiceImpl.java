@@ -63,6 +63,7 @@ public abstract class AbstractIdServiceImpl implements IdService {
                 throw new RuntimeException(msg);
             }
         }
+        setIdConverter(new IdConverterImpl(this.idMeta));
     }
 
     public long genId() {
