@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="dubboGenerator"/>
+    <dubbo:registry address="multicast://224.5.6.7:1234"/>
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:service interface="com.luther.base.intf.IdService" ref="idService"/>
+    <dubbo:service interface="com.luther.base.intf.Demo" ref="demo"/>
+    <bean id="demo" class="com.luther.base.impl.DemoImp"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="application.properties"/>
+    </bean>
+    <bean id="idServiceFactory" class="com.luther.base.service.factory.IdServiceFactoryBean" init-method="init">
+        <property name="providerType" value="${generator.factory.type}"/>
+        <property name="genMethod" value="${generator.factory.genMethd}"/>
+        <property name="machineId" value="${generator.factory.machine}"/>
+    </bean>
+
+    <bean id="idService" factory-bean="idServiceFactory" factory-method="getObject"/>
+
+</beans>

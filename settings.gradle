@@ -1,4 +1,6 @@
 rootProject.name = 'sign-id-generator'
 include 'generator-service'
 include 'generator-intf'
+include 'dubbo-generator'
+include 'generator-sample'
 
